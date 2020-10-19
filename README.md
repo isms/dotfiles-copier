@@ -2,7 +2,7 @@
 
 A single script to copy all of your scattered dotfiles and
 config folders to a specified directory. Can automatically
-`git commit` changes.
+`git commit` changes. Can additionallay archive into .tar.gz file.
 
 ### Example
 
@@ -68,11 +68,15 @@ If you wish to arrange the files specifically in a subdirectory
 of the backup directory, you can include a `subdir` entry in
 the task.
 
+To specify a .tar.gz file, include an archive tag with the path
+to where you want the archive.
+
 Here is an example with subdirs:
 
 ```yaml
 ---
 dest: "~/.dotfiles"
+archive: "~/.dotfiles.tar.gz"
 tasks:
     # misc files from home directory
   - src: "~/.bashrc"
