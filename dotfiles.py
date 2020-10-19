@@ -120,9 +120,16 @@ def main(conf_path, dest, git_commit, tar_gz):
         
         if not created and not changed:
             click.echo('no changes made, skipping git commit')
+    if tar_gz is not None:
+        click.echo('tar-gz file specified by argument')
+        archive = tar_gz
+    elif 'archive' in conf:
+        click.echo('tar-gz specified in config')
+        archive = os.path.expanduser(conf['archive'])
+    click.echo('using archive path {}'.format(archive))
 
-    if tar_gz:
-        with tarfile.open(tar_gz, "w:gz") as tar:
+    if archive:
+        with tarfile.open(archive, "w:gz") as tar:
             tar.add(dotfiles_dir, arcname=os.path.basename(dotfiles_dir))
 
 
