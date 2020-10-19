@@ -92,7 +92,7 @@ def commit_changes(git_path):
 def main(conf_path, dest, git_commit, tar_gz):
     # load the config
     with open(conf_path, 'r') as f:
-        conf = yaml.load(f)
+        conf = yaml.safe_load(f)
 
     # if the dotfiles directory is defined in the config file, use that
     if dest is not None:
