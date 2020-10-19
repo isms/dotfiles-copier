@@ -8,6 +8,7 @@ from sh import cp
 from sh import git
 from sh import mkdir
 from datetime import datetime
+import tarfile
 
 
 HOME_DIR = os.environ.get('HOME')
@@ -87,7 +88,8 @@ def commit_changes(git_path):
 @click.argument('conf_path', type=CONF_PATH_TYPE, default=DEFAULT_CONF)
 @click.option('--dest', type=DIR_PATH_TYPE, default=None)
 @click.option('--git-commit/--no-commit', default=False)
-def main(conf_path, dest, git_commit):
+@click.option('--tar-gz')
+def main(conf_path, dest, git_commit, tar_gz):
     # load the config
     with open(conf_path, 'r') as f:
         conf = yaml.load(f)
@@ -118,6 +120,10 @@ def main(conf_path, dest, git_commit):
         
         if not created and not changed:
             click.echo('no changes made, skipping git commit')
+
+    if tar_gz:
+        with tarfile.open(tar_gz, "w:gz") as tar:
+            tar.add(dotfiles_dir, arcname=os.path.basename(dotfiles_dir))
 
 
 if __name__ == '__main__':
