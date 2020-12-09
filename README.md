@@ -2,7 +2,7 @@
 
 A single script to copy all of your scattered dotfiles and
 config folders to a specified directory. Can automatically
-`git commit` changes. Can additionallay archive into .tar.gz file.
+`git commit` changes. Can additionally archive into `.tar.gz` file.
 
 ### Example
 
